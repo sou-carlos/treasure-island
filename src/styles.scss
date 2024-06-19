@@ -1,1 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
+
+$yellow-sun: #FFDA54;
+$black-noar: #11111A;
+$peaceful-heat: #F9F6ED;
+$peaceful-heat-twilight: #E6D7AA;
+$peaceful-heat-dusk: #baa978;
+$pacific-ocean: #3E5DA8;
+
+.button {
+  width: 280px;
+  background: $peaceful-heat;
+  height: 70px;
+  padding: 20px 60px;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0px 5px 0px 0px $peaceful-heat-twilight;
+}
+
+.button:hover {
+  cursor: pointer;
+  background: $peaceful-heat-twilight;
+  box-shadow: 0px 5px 0px 0px $peaceful-heat-dusk;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  background: #CCCCCC;
+  box-shadow: 0px 5px 0px 0px #999;
+}
+
+.button-text {
+  font-family: 'Fredoka One', sans-serif;
+  font-size: 1.5rem;
+  color: $pacific-ocean;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+body {
+  background: url("../src/assets/img/background.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  font-family: sans-serif;
+}
