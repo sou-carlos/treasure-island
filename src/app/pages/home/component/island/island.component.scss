@@ -1,0 +1,21 @@
+.island-container {
+  width: 200px;
+  height: 200px;
+  background-color: rgb(208, 208, 208);
+  border-radius: 50%;
+
+  text-align: center;
+  color: white;
+  font-weight: 700;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.complete {
+  background-color: yellow;
+}
+
+.locked {
+  background-color: rgb(95, 95, 95);
+  cursor: not-allowed;
+}
