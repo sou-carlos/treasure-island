@@ -15,11 +15,26 @@ export class HomeComponent implements OnInit {
 
   public archipelago: any = {};
 
+  public teste!: any;
+
   constructor(private islandService: IslandService){}
 
   ngOnInit() {
-    this.archipelago = this.islandService.getArchipelagoInfo();
-    console.log(this.archipelago);
+    // this.archipelago = this.islandService.getArchipelagoInfo();
+
+    this.islandService.test$
+      .subscribe({
+        next: (data) => {
+          this.archipelago =  data;
+          console.log(this.archipelago);
+
+        },
+        error: (err) => {
+          console.log('ERROR ARCHIPELAGO');
+
+        }
+      })
+
 
   }
 }

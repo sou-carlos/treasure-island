@@ -1,7 +1,10 @@
 import { Component, Input, OnInit, inject, signal } from '@angular/core';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
-import { IslandDialogComponent } from '../island-dialog/island-dialog.component';
 import { NgClass } from '@angular/common';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+
+import { IslandDialogComponent } from '../island-dialog/island-dialog.component';
+import { IslandService } from '../../../../shared/services/island.service';
+import { Island } from '../../../../shared/interfaces/island'
 
 @Component({
   selector: 'app-island',
@@ -14,6 +17,8 @@ export class IslandComponent implements OnInit{
   readonly dialog = inject(MatDialog)
 
   @Input()
+  island!: Island;
+
   isLocked: boolean = false;
 
   @Input()
@@ -28,11 +33,17 @@ export class IslandComponent implements OnInit{
   @Input()
   textContent: string = 'Ilha 0'
 
+  @Input()
+  requiredToUnlock: any;
+
   //1: declara answer como um signal
   readonly answer = signal('');
 
-  ngOnInit(): void {
+  constructor(private readonly _islandService: IslandService) {}
 
+
+  ngOnInit(): void {
+    this.isLocked = this._islandService.isIslandLocked(this.island.id)
   }
 
   public handleClick() {
@@ -59,6 +70,7 @@ export class IslandComponent implements OnInit{
          //verifica se a resposta está correta
         if(this.answer() === this.correctAnswer) {
           this.isComplete = true;
+          this._islandService.postCompletedIsland(this.island.id)
           console.log(this.isComplete);
         }
       }

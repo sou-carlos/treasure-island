@@ -1,5 +1,5 @@
 <main>
   <div *ngFor="let island of archipelago.islands">
-    <app-island [textContent]="island.textContent"></app-island>
+    <app-island [island]="island" [textContent]="island.textContent"></app-island>
   </div>
 </main>
