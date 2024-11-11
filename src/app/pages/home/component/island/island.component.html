@@ -1,6 +1,6 @@
 <div class="island-container"
   [ngClass]="isComplete ? 'complete' : '' "
-  [ngClass]="isLocked ? 'locked' : ''"
+  [ngClass]="island.isUnlocked ? '' : 'locked'"
   (click)="handleClick()">
   <p>{{ textContent }}</p>
 </div>

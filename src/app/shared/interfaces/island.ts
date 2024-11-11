@@ -1,10 +1,10 @@
 export interface Island {
   id: number;
   isComplete: boolean;
+  isUnlocked: boolean;
   question : string;
   correctAnswer : any;
   textContent: string;
-  requiredToUnlock: Array<number>;
 }
 
 export interface Archipelago {
@@ -13,4 +13,3 @@ export interface Archipelago {
   islands: Array<Island>
 }
 
-// necessaryToUnlocked Array com id das ilhas necessarias para desbloquear essa ilha

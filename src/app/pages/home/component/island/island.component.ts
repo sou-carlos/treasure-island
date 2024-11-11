@@ -19,8 +19,6 @@ export class IslandComponent implements OnInit{
   @Input()
   island!: Island;
 
-  isLocked: boolean = false;
-
   @Input()
   isComplete: boolean = false;
 
@@ -41,13 +39,11 @@ export class IslandComponent implements OnInit{
 
   constructor(private readonly _islandService: IslandService) {}
 
-
   ngOnInit(): void {
-    this.isLocked = this._islandService.isIslandLocked(this.island.id)
   }
 
   public handleClick() {
-    if(this.isLocked) {
+    if(!this.island.isUnlocked) {
       console.log("fase bloqueada");
       return
     }
@@ -71,7 +67,6 @@ export class IslandComponent implements OnInit{
         if(this.answer() === this.correctAnswer) {
           this.isComplete = true;
           this._islandService.postCompletedIsland(this.island.id)
-          console.log(this.isComplete);
         }
       }
     });

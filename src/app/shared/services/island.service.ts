@@ -18,26 +18,26 @@ export class IslandService {
       {
         id: 0,
         isComplete: false,
+        isUnlocked: true,
         question: 'Quanto é 1 + 3',
         correctAnswer: '4',
         textContent: 'Ilha 1',
-        requiredToUnlock: []
       },
       {
         id: 1,
         isComplete: false,
+        isUnlocked: false,
         question: 'Quanto é 4 + 3',
         correctAnswer: '7',
         textContent: 'Ilha 2',
-        requiredToUnlock: [0]
       },
       {
         id: 2,
         isComplete: false,
+        isUnlocked: false,
         question: 'Quanto é 4 x 3',
         correctAnswer: '12',
         textContent: 'Ilha 3',
-        requiredToUnlock: [1]
       }
     ]
   }
@@ -50,49 +50,31 @@ export class IslandService {
   }
 
   public postCompletedIsland(islandId: number) {
+    //Aqui eu tenho que fazer um post pra API e verificar se a resposta está correta
     this.archipelago.completedIsland.push(islandId);
-    this.updateArchipelagoObject()
+    this.updateArchipelagoObject(islandId)
   }
 
-  public updateArchipelagoObject() {
-    this.archipelago.islands[0].isComplete = true;
-    this.archipelago.islands[1].isComplete = true;
+  public updateArchipelagoObject(island: number) {
+
+    switch(island) {
+      case 0:
+        this.archipelago.islands[0].isComplete = true;
+        this.archipelago.islands[1].isUnlocked = true;
+        break
+      case 1:
+        this.archipelago.islands[1].isComplete = true;
+        this.archipelago.islands[2].isUnlocked = true;
+        break;
+      case 2:
+        this.archipelago.islands[2].isComplete = true;
+        break;
+    }
+
     this.test$.next(this.archipelago)
   }
 
   public getArchipelagoInfo() {
     return this.archipelago;
-  }
-
-  //TO DO: Refatorar, fazer novas funções
-  public isIslandLocked (islandId: number): boolean {
-    let quantityToUnlock: any;
-    let completeIslands: any;
-
-    this.archipelago.islands.forEach(island => {
-      //peguei a ilha com o ID que recebi
-      if(islandId === island.id){
-        quantityToUnlock = island.requiredToUnlock.length
-
-        //pega o array de ilhas completas
-        this.archipelago.completedIsland.forEach(complete => {
-          //verifica se as ilhas necessaria para desbloquear já está completa
-          if(island.requiredToUnlock[0] === complete){
-            completeIslands++;
-          }
-        });
-      }
-    });
-
-    //se a ilha não precisar de nada para ser desbloqueada
-    if(quantityToUnlock === 0) {
-      return false;
-    }
-
-    if(quantityToUnlock === completeIslands){
-      return false;
-    }
-
-    return true;
   }
 }

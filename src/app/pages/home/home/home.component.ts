@@ -15,8 +15,6 @@ export class HomeComponent implements OnInit {
 
   public archipelago: any = {};
 
-  public teste!: any;
-
   constructor(private islandService: IslandService){}
 
   ngOnInit() {

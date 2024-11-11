@@ -10,9 +10,7 @@ import { Router } from '@angular/router';
 })
 export class WelcomeComponent {
 
-  constructor(private _router: Router) {
-
-  }
+  constructor(private _router: Router) {}
 
   public goToHome() {
     this._router.navigateByUrl('/home')
